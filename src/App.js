@@ -1,23 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+// This is a simple React application that uses the useState and useEffect hooks.
+
+//useState is used to manage the state of the application.
+//useEffect is used to perform side effects in function components.
+import React, { useState, useEffect } from "react";
 
 function App() {
+  const [data, setData] = useState([{}]);
+
+  useEffect(() => {
+    // Fetch data from the server when the component mounts
+    fetch("/members")
+      .then((response) => response.json())
+      .then((data) => {
+        setData(data);
+        console.log("Data fetched:", data);
+      });
+  }, []);
+  //The empty dependency array [] means this effect will only run once, similar to componentDidMount in class components.
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>Members List</h1>
+      {typeof data.members === "undefined" ? (
+        <p>Loading...</p>
+      ) : (
+        data.members.map((member, index) => <p key={index}> {member} </p>)
+      )}
     </div>
   );
 }
