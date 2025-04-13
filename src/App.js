@@ -1,7 +1,7 @@
 // This is a simple React application that uses the useState and useEffect hooks.
 
 //useState is used to manage the state of the application.
-//useEffect is used to perform side effects in function components.
+//useEffect is used to perform side effects in function component.
 import React, { useState, useEffect } from "react";
 
 function App() {
